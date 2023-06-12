@@ -1,31 +1,27 @@
-<ng-container *ngIf="(googleApiFontsIterable$ | async) as fonts else Loading">
+<ng-container *ngIf="googleApiFontsIterable$ | async as fonts; else Loading">
+  <input
+    type="search"
+    id="font-input"
+    autocomplete="off"
+    [style.font-family]="value$ | async"
+    [value]="prefixInput$ | async"
+    (input)="onUserPrefixInput($event)"
+    (change)="onUserPrefixInput($event)"
+    (click)="openOverlay()"
+  />
 
-    <input type="search"
-        id="font-input"
-        autocomplete="off"
-        [style.font-family]="value$ | async"
-        [value]="prefixInput$ | async"
-        (input)="onUserPrefixInput($event)"
-        (change)="onUserPrefixInput($event)"
-        (click)="openOverlay()"
-    />
-
-    <!-- Overlay for font selection -->
-    <div id="overlay" *ngIf="(showOverlay$ | async) && (value$ | async) as value">
-        <byte-this-google-font-preview
-            class="font-entry"
-            [class.font-entry-selected]="font.data!.family === value"
-            *ngFor="let font of fonts"
-            [font-family]="font.data!.family"
-            (click)="onOverlayFontClick(font.data!.family)"
-            (mouseenter)="previewMouseEnter(font.data!)"
-            (mouseleave)="previewMouseLeave()"
-            (error)="onPreviewError($event)"
-        ></byte-this-google-font-preview>
-    </div>
-    
-
+  <!-- Overlay for font selection -->
+  <div id="overlay" *ngIf="(showOverlay$ | async) && (value$ | async) as value">
+    <byte-this-google-font-preview
+      class="font-entry"
+      [class.font-entry-selected]="font.data! === value"
+      *ngFor="let font of fonts"
+      [font-family]="font.data!"
+      (click)="onOverlayFontClick(font.data!)"
+      (mouseenter)="previewMouseEnter(font.data!)"
+      (mouseleave)="previewMouseLeave()"
+      (error)="onPreviewError($event)"
+    ></byte-this-google-font-preview>
+  </div>
 </ng-container>
-<ng-template #Loading>
-    Loading fonts...
-</ng-template>
+<ng-template #Loading> Loading fonts... </ng-template>

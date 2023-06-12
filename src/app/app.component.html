@@ -1,47 +1,97 @@
 <h1>Ngx-Google-Fonts</h1>
 <content>
   <p>
-    This is a pure-Angular library which provdes an input component for a user to select a web safe font or google font.
-    It includes:
+    This is a pure-Angular library which provdes an input component for a user
+    to select a web safe font or google font. It includes:
   </p>
   <ul>
     <li>Loading the list of Google fonts.</li>
     <li>Proving a select-like interface for selecting a font.</li>
-    <li>Lazy-loading fonts so the select can render the fonts as the user scrolls.</li>
-    <li>Loading the currently selected font, if a font is initially provided to the component.</li>
+    <li>
+      Lazy-loading fonts so the select can render the fonts as the user scrolls.
+    </li>
+    <li>
+      Loading the currently selected font, if a font is initially provided to
+      the component.
+    </li>
     <li>Prefix-based font lookup.</li>
   </ul>
 
   <p>
-    To test this out, get a Google API key, enter it into the textarea below, and click "Load"
+    To test this out, get a Google API key, enter it into the textarea below,
+    and click "Load"
   </p>
 
   <hr />
   <label for="key">Google Api Key:</label>
   <br />
-  <input type="text" [value]="tentativeApiKey$ | async" (change)="onApiKeyChange($event)">
+  <input
+    type="text"
+    [value]="tentativeApiKey$ | async"
+    (change)="onApiKeyChange($event)"
+  />
   <br />
   <button (click)="onKeySubmit()">Load!</button>
 
   <hr />
 
-  <p>The currently selected font is {{ selectedFont$ | async }}, and the font the mouse is hovering over is {{
-    hoverFont$ | async }}.</p>
-  <byte-this-google-font-selector-input [google-api-key]="apiKey$ | async" value="ABeeZee"
-    (change)="onFontChange($event)" (hover-value)="onFontHover($event)"></byte-this-google-font-selector-input>
-  <p>We can use this paragraph to ensure the selection overlay does not shift
-    the elements under it.
+  <p>
+    The currently selected font is {{ selectedFont$ | async }}, and the font the
+    mouse is hovering over is {{ hoverFont$ | async }}.
+  </p>
+  <byte-this-google-font-selector-input
+    value="ABeeZee"
+    (change)="onFontChange($event)"
+    [fonts]="['Are You Serious', 'ABeeZee', 'Aclonica', 'Acme', 'Actor']"
+    (hover-value)="onFontHover($event)"
+  ></byte-this-google-font-selector-input>
+  <p>
+    We can use this paragraph to ensure the selection overlay does not shift the
+    elements under it.
   </p>
 
-  <hr/>
+  <hr />
 
-  <p [style.font-family]="selectedFont$ | async">This is a free, open source library provided by <b>Byte This!</b>. For more resources:</p>
+  <p [style.font-family]="selectedFont$ | async">
+    This is a free, open source library provided by <b>Byte This!</b>. For more
+    resources:
+  </p>
   <ul [style.font-family]="selectedFont$ | async">
-    <li><b><a href="https://bytethisstore.com/articles/pg/angular-font-selector-component" target="_blank">Detailed Instructions on How to Use This Library</a></b></li>
-    <li><b><a href="https://bytethisstore.com/articles/pg/angular-font-selector-implementation" target="_blank">Overview of How this Library is Implemented</a></b></li>
-    <li><b>Website</b>: <a href="https://www.bytethisstore.com" target="_blank">www.bytethisstore.com</a></li>
-    <li><b>GitHub</b>: <a href="https://github.com/ByteThisStore" target="_blank">ByteThisStore on GitHub</a></li>
-    <li><b>Our Dev Pages</b>: <a href="https://bytethisstore.com/articles/catalog" target="_blank">articles and pages on programming topics</a></li>
+    <li>
+      <b
+        ><a
+          href="https://bytethisstore.com/articles/pg/angular-font-selector-component"
+          target="_blank"
+          >Detailed Instructions on How to Use This Library</a
+        ></b
+      >
+    </li>
+    <li>
+      <b
+        ><a
+          href="https://bytethisstore.com/articles/pg/angular-font-selector-implementation"
+          target="_blank"
+          >Overview of How this Library is Implemented</a
+        ></b
+      >
+    </li>
+    <li>
+      <b>Website</b>:
+      <a href="https://www.bytethisstore.com" target="_blank"
+        >www.bytethisstore.com</a
+      >
+    </li>
+    <li>
+      <b>GitHub</b>:
+      <a href="https://github.com/ByteThisStore" target="_blank"
+        >ByteThisStore on GitHub</a
+      >
+    </li>
+    <li>
+      <b>Our Dev Pages</b>:
+      <a href="https://bytethisstore.com/articles/catalog" target="_blank"
+        >articles and pages on programming topics</a
+      >
+    </li>
   </ul>
-
 </content>

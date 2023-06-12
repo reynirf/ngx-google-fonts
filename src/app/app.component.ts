@@ -1,20 +1,18 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { iGoogleFont } from 'projects/ngx-google-fonts-lib/src/lib/models/google-font';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-
-  tentativeApiKey$ = new BehaviorSubject("");
+  tentativeApiKey$ = new BehaviorSubject('');
   apiKey$ = new BehaviorSubject<string | null>(null);
 
-  selectedFont$ = new BehaviorSubject("<none>");
-  hoverFont$ = new BehaviorSubject("<none>");
+  selectedFont$ = new BehaviorSubject('<none>');
+  hoverFont$ = new BehaviorSubject('<none>');
 
   onApiKeyChange(event: Event): void {
     const value = (event.target as any).value;
@@ -23,14 +21,14 @@ export class AppComponent {
 
   onKeySubmit(): void {
     this.apiKey$.next(this.tentativeApiKey$.value);
-    console.log("Submitting key: "+this.tentativeApiKey$.value);
+    console.log('Submitting key: ' + this.tentativeApiKey$.value);
   }
 
-  onFontChange(event: iGoogleFont): void {
-    this.selectedFont$.next(event.family);
+  onFontChange(event: string): void {
+    this.selectedFont$.next(event);
   }
 
-  onFontHover(font: iGoogleFont | null): void {
-    this.hoverFont$.next(font ? font.family : "<none>");
+  onFontHover(font: string | null): void {
+    this.hoverFont$.next(font ?? '<none>');
   }
 }
