@@ -1,42 +1,55 @@
 :host {
-    display :block;
-    position: relative;
+  display: block;
+  position: relative;
+}
+
+#font-input::-webkit-search-cancel-button {
+  display: none;
 }
 
 #font-input {
-    font-size: var(--input-font-size, 1.1em);
-    padding: var(--input-padding, 0.25em);
-    width: 100%;
-    cursor: pointer;
-    text-align: var(--input-text-align, center);
+  font-size: var(--input-font-size, 1.1em);
+  padding: var(--input-padding, 0.25em);
+  width: 100%;
+  cursor: pointer;
+  text-align: var(--input-text-align, center);
+  outline: 0;
+  cursor: text;
+  border: 0;
+  background: none;
+  border-bottom: 1px solid var(--color-lighter-grey);
+  display: block;
+  flex: 1;
+  font-weight: 500;
+  padding: 5px 0;
 }
 
 #overlay {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
 
-    background-color: var(--selection-background-color, white);
+  background-color: var(--selection-background-color, white);
 
-    height: var(--selection-height, 40vh);
-    width: var(--selection-width, 100%);
+  height: var(--selection-height, 40vh);
+  width: var(--selection-width, 100%);
 
-    z-index: var(--selection-z-index, 1000);
-    border: 2px solid var(--selection-border-color, black);
-    overflow: auto;
+  z-index: var(--selection-z-index, 1000);
+  border: 1px solid var(--color-grey, black);
+  overflow: auto;
 }
 
 .font-entry {
-    cursor: pointer;
-    border-bottom: 1px solid var(--selection-border-color, black);
-    padding: var(--selection-padding, 0.75em);
-    font-size: var(--selection-font-size, 1.75em);
+  cursor: pointer;
+  border-bottom: 1px solid var(--color-grey, black);
+  padding: var(--selection-padding, 0.75em);
+  font-size: var(--selection-font-size, 1.75em);
 }
 
 .font-entry:hover {
-    background-color: var(--selection-background-color-hover, lightgray);
+  background-color: var(--selection-background-color-hover, lightgray);
 }
 
 .font-entry-selected {
-    background-color: var(--selection-background-color-selected, lightgray);
+  background-color: var(--selection-background-color-selected, lightgray);
 }

@@ -18,8 +18,6 @@
       *ngFor="let font of fonts"
       [font-family]="font.data!"
       (click)="onOverlayFontClick(font.data!)"
-      (mouseenter)="previewMouseEnter(font.data!)"
-      (mouseleave)="previewMouseLeave()"
       (error)="onPreviewError($event)"
     ></byte-this-google-font-preview>
   </div>

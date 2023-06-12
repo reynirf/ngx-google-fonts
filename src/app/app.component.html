@@ -39,12 +39,20 @@
     The currently selected font is {{ selectedFont$ | async }}, and the font the
     mouse is hovering over is {{ hoverFont$ | async }}.
   </p>
+
   <byte-this-google-font-selector-input
     value="ABeeZee"
     (change)="onFontChange($event)"
-    [fonts]="['Are You Serious', 'ABeeZee', 'Aclonica', 'Acme', 'Actor']"
-    (hover-value)="onFontHover($event)"
+    [fonts]="[
+      'Are You Serious',
+      'ABeeZee',
+      'Aclonica',
+      'Acme',
+      'Actor',
+      'Nunito'
+    ]"
   ></byte-this-google-font-selector-input>
+
   <p>
     We can use this paragraph to ensure the selection overlay does not shift the
     elements under it.

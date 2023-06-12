@@ -12,7 +12,13 @@ import {
   ElementRef,
 } from '@angular/core';
 import { iWordWithData } from '@byte-this/collections';
-import { BehaviorSubject, combineLatest, filter, Subscription } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  distinctUntilChanged,
+  filter,
+  Subscription,
+} from 'rxjs';
 import { GoogleFontService } from '../../services/google-font-service';
 
 @Component({
@@ -57,16 +63,18 @@ export class ByteThisFontSelectorComponent
     this.googleFontService.setFonts(this.fonts);
     //when prefix is updated, update list of google fonts
     this.subs.push(
-      this.prefixInput$.subscribe(async ([prefix]) => {
-        this.googleApiFontsIterable$.next(
-          await this.googleFontService
-            .getFontsIterable(prefix!)
-            .catch((err) => {
-              this.error.emit(err);
-              throw err;
-            })
-        );
-      })
+      this.prefixInput$
+        .pipe(distinctUntilChanged())
+        .subscribe(async (prefix) => {
+          this.googleApiFontsIterable$.next(
+            await this.googleFontService
+              .getFontsIterable(prefix!)
+              .catch((err) => {
+                this.error.emit(err);
+                throw err;
+              })
+          );
+        })
     );
 
     //when value is updated, update prefix
@@ -132,18 +140,10 @@ export class ByteThisFontSelectorComponent
     this.hoverValue.next(null);
   }
 
-  previewMouseEnter(font: string): void {
-    this.hoverValue.next(font);
-  }
-
-  previewMouseLeave(): void {
-    this.hoverValue.next(null);
-  }
-
   onUserPrefixInput(event: Event): void {
     event.stopPropagation();
     const value = (event.target as any).value.trim();
-    if (value !== this.prefixInput$) {
+    if (value !== this.prefixInput$.value) {
       this.prefixInput$.next(value);
     }
 
