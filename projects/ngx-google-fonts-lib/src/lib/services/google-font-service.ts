@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CollectPendingMethodInvocations } from '@byte-this/funscript';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
-import {
-  AvlSortedList,
-  iWordWithData,
-  SortedTrie,
-  Trie,
-} from '@byte-this/collections';
+import { AvlSortedList, iWordWithData, Trie } from '@byte-this/collections';
 import * as WebFont from 'webfontloader';
 
 @Injectable({
